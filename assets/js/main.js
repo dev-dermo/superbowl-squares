@@ -1,16 +1,4 @@
-const winningScores = [
-	[5, 3],
-	[0, 7],
-	[8, 1],
-	[6, 4],
-	[1, 2],
-	[1, 8],
-	[7, 9],
-	[2, 1],
-	[3, 3],
-	[4, 0],
-	[4, 8],
-];
+const winningScores = [];
 
 function drawMsg(status, cls='default') {
 	document.querySelector('#result').innerHTML = '';
@@ -26,6 +14,8 @@ function drawMsg(status, cls='default') {
 function calcScore() {
 	let chiefsScore = document.querySelector('#chiefs-input').value;
 	let buccsScore = document.querySelector('#buccs-input').value;
+	console.log(chiefsScore);
+	console.log(buccsScore);
 
 	chiefsScore = chiefsScore[chiefsScore.length - 1];
 	buccsScore = buccsScore[buccsScore.length - 1];
@@ -42,5 +32,27 @@ function calcScore() {
 	}
 }
 
+function addWinningScore (event) {
+	event.preventDefault();
+	let square = [];
+	let ramsScore = document.querySelector("#rams").value;
+	let bengalsScore = document.querySelector("#bengals").value;
+	if (!ramsScore || !bengalsScore) {
+		alert("you need to enter two ending scores")
+		return;
+	}
+	ramsScore = parseInt(ramsScore);
+	square.push(ramsScore);
+	console.log(`rams ${ramsScore}`)
+	bengalsScore = parseInt(bengalsScore);
+	square.push(bengalsScore)
+	console.log(`rams ${bengalsScore}`)
+	winningScores.push(square);
+	console.log(winningScores);
+	const yourSquares = document.querySelector("#your-squares")
+	yourSquares.innerHTML = "<pre>" + winningScores + "<br />" + "</pre>";
+}
+
 document.querySelector('#chiefs-input').addEventListener('input', () => calcScore());
 document.querySelector('#buccs-input').addEventListener('input', () => calcScore());
+document.querySelector("#addSquare").addEventListener('click', addWinningScore)
