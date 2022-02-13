@@ -1,15 +1,24 @@
 const winningScores = [
-	[5, 3],
-	[0, 7],
-	[8, 1],
-	[6, 4],
-	[1, 2],
-	[1, 8],
-	[7, 9],
-	[2, 1],
-	[3, 3],
-	[4, 0],
+	[6, 1],
+	[4, 1],
+	[0, 5],
+	[1, 5],
+	[6, 6],
+	[5, 6],
+	[7, 3],
+	[0, 3],
+	[1, 3],
+	[9, 0],
+	[8, 0],
+	[7, 4],
+	[3, 9],
+	[4, 9],
+	[5, 9],
+	[7, 7],
+	[9, 2],
+	[6, 8],
 	[4, 8],
+	[5, 8],
 ];
 
 function drawMsg(status, cls='default') {
@@ -24,13 +33,13 @@ function drawMsg(status, cls='default') {
 }
 
 function calcScore() {
-	let chiefsScore = document.querySelector('#chiefs-input').value;
-	let buccsScore = document.querySelector('#buccs-input').value;
+	let bengalsScore = document.querySelector('#bengals-input').value;
+	let ramsScore = document.querySelector('#rams-input').value;
 
-	chiefsScore = chiefsScore[chiefsScore.length - 1];
-	buccsScore = buccsScore[buccsScore.length - 1];
+	bengalsScore = bengalsScore[bengalsScore.length - 1];
+	ramsScore = ramsScore[ramsScore.length - 1];
 
-	let toCompare = JSON.stringify([parseInt(chiefsScore), parseInt(buccsScore)]);
+	let toCompare = JSON.stringify([parseInt(bengalsScore), parseInt(ramsScore)]);
 
 	for (let i=0;i<winningScores.length;i++) {
 		if (JSON.stringify(winningScores[i]) === toCompare) {
@@ -42,5 +51,5 @@ function calcScore() {
 	}
 }
 
-document.querySelector('#chiefs-input').addEventListener('input', () => calcScore());
-document.querySelector('#buccs-input').addEventListener('input', () => calcScore());
+document.querySelector('#bengals-input').addEventListener('input', () => calcScore());
+document.querySelector('#rams-input').addEventListener('input', () => calcScore());
