@@ -1,13 +1,13 @@
 const winningScores = [];
 
-function drawMsg(status, cls='default') {
+function drawMsg(status, cls = 'default') {
 	document.querySelector('#result').innerHTML = '';
 	let msg = document.createElement('div');
 	let heading = document.createElement('h1');
 	msg.setAttribute('class', `alert alert-${cls} p-4 m-4`);
 	heading.textContent = status;
 	msg.appendChild(heading);
-	
+
 	document.querySelector('#result').appendChild(msg);
 }
 
@@ -22,7 +22,7 @@ function calcScore() {
 
 	let toCompare = JSON.stringify([parseInt(chiefsScore), parseInt(buccsScore)]);
 
-	for (let i=0;i<winningScores.length;i++) {
+	for (let i = 0; i < winningScores.length; i++) {
 		if (JSON.stringify(winningScores[i]) === toCompare) {
 			drawMsg('Winning!', 'success');
 			break;
@@ -32,7 +32,7 @@ function calcScore() {
 	}
 }
 
-function addWinningScore (event) {
+function addWinningScore(event) {
 	event.preventDefault();
 	let square = [];
 	let ramsScore = document.querySelector("#rams").value;
@@ -41,16 +41,21 @@ function addWinningScore (event) {
 		alert("you need to enter two ending scores")
 		return;
 	}
+	// Get Team 1 score
 	ramsScore = parseInt(ramsScore);
 	square.push(ramsScore);
-	console.log(`rams ${ramsScore}`)
+	// Get Team 2 score
 	bengalsScore = parseInt(bengalsScore);
 	square.push(bengalsScore)
-	console.log(`rams ${bengalsScore}`)
+	// Add scores to winning scores
 	winningScores.push(square);
-	console.log(winningScores);
-	const yourSquares = document.querySelector("#your-squares")
-	yourSquares.innerHTML = "<pre>" + winningScores + "<br />" + "</pre>";
+	// Get last added score
+	const lastScore = winningScores[winningScores.length - 1];
+	// Append last added score
+	const yourSquares = document.querySelector("#your-squares");
+	const paragraph = document.createElement("p");
+	paragraph.textContent = lastScore;
+	yourSquares.appendChild(paragraph);
 }
 
 document.querySelector('#chiefs-input').addEventListener('input', () => calcScore());
